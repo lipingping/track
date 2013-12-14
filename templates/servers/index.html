@@ -1,0 +1,39 @@
+{% extends "bases/_base.html" %}
+{% block headStyleBlock %}
+<!-- set instances tables.name display -->
+<style> 
+	td.instance-name{
+		white-space:nowrap; 
+		max-width:95px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	td.instance-name:hover{
+		text-overflow:inherit;
+		overflow:none;
+	}
+</style>
+{% endblock %}
+
+{% block headJsBlock %}
+
+{% endblock %}
+
+{% block pageTopHeader %}
+{% include "bases/_pageTopHeader.html" %}
+{% endblock %}
+
+{% block pageBanner %}
+{% endblock %}
+{% block leftMenu %}
+{% include "content/leftMenu.html" %}
+{% endblock %}
+
+{% block mainContent %}
+	{% include "servers/_index.html" %}
+{% endblock %}
+
+{% block footerJsBlock %}
+<script src="/assets/js/jquery.tables.js"></script>
+<script src="/assets/js/servers.index.js"></script>
+{%endblock%}

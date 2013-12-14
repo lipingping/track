@@ -1,0 +1,56 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th width="15%">Name</th>
+			<th width="12%">Address</th>
+			<th width="12%">Vcpus</th>
+			<th width="15%">Memory(MB)</th>
+			<th width="15%">Disk(GB)</th>
+			<th width="15%">Status</th>
+			<th style="min-width:117px;width:%12">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for h in instances %}
+		<tr>
+			<td><a href="/instances/{{h.id}}">{{ h.name }}</a></td>
+			<td>Private:{{h.addresses.private.0.addr}}
+				{% if h.addresses.public.0.addr %}
+					Public:{{h.addresses.public.0.addr}}
+				{% endif %}
+			</td>
+			<td>{{h.info.vcpus}}</td>
+			<td> {{h.info.ram}}
+				{% if h.info.swap %}
+				/{{h.info.swap}}
+				{%endif%}
+			</td>
+			<td> {{h.info.disk}}</td>
+			<td> {{h.power }}/ {{h.status}}</td>
+			<td>
+				<!-- Split button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-default">Console</button>
+					<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+						<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Reboot</a></li>
+						<li><a href="#">Shutdown</a></li>
+						<li><a href="#">Suspend</a></li>
+						<li><a href="#">Pause</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Edit</a></li>
+						<li><a href="#">Remove</a></li>
+						<li><a href="#">Clone</a></li>
+						<li><a href="#">Snapshot</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Remove from favorite</a></li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

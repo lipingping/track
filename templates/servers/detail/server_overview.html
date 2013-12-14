@@ -1,0 +1,24 @@
+<div class="page-header" style="margin-top:-15px;">
+	<h3>basic info</h3>
+</div>
+<div class="well">
+	<p> server name: {{server.name}} </p>
+	<p> server status: {{server.status}} </p>
+	<p> server id: {{server.id}} </p>
+</div>
+<div class="page-header" style="margin-top:-10px;">
+	<h3>specs</h3>
+</div>
+<div class="well">
+	<p> server vcpu: {{server.metadata.flavor.vcpus}} </p>
+	<p> server memory: {{server.metadata.flavor.ram}} </p>
+	<p> server swap: {{server.metadata.flavor.swap}} </p>
+	<p> server disk: {{server.metadata.flavor.disk}} </p>
+	<p> server ephemeral: {{server.metadata.flavor.ephemeral}} </p>
+	<p> server image_name: 
+	<a href="{{ SITE_PATH.images_snapshots}}{{server.image.id}}" >{{server.image_name}}</a> 
+	</p>
+	{% for i in server.metadata.volumes %}
+	{{i.device}} ,{{ i.id}}, {{i.is_loaded}}, {{ i.name}}, {{ i.serverId}}, {{  i.volumeId}}
+	{% endfor %}
+</div>

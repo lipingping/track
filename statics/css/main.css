@@ -1,0 +1,16 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+span.glyphicon.glyphicon{
+	display:block;
+	float:left;
+}
+span.menuText{
+	display:block;
+	padding-left:20px;
+	padding-top:2px;
+	size:15px;
+}

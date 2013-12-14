@@ -1,0 +1,61 @@
+<div class='row'>
+	{% with rt=usage.cpu_used%}
+	<div class="col-lg-4 pull-right">
+		vcpus: {{usage.cpu_used}}/{{quota.cores}}
+	</div>
+	<div  class="col-lg-8">
+		<div class="progress">
+			<div class="progress-bar progress-bar-success" role="progressbar" 
+				aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{rt}}%">
+				<span class="sr-only">{{rt}}% Complete (success)</span>
+			</div>
+		</div>
+	</div>
+	{%endwith%}
+</div>
+<div class='row'>
+	{% with rt=usage.ram_used %}
+	<div class="col-lg-4 pull-right">
+		Ram: {{ usage.ram_used }} / {{ quota.ram}}MB
+	</div>
+	<div  class="col-lg-8">
+		<div class="progress">
+			<div class="progress-bar progress-bar-info" role="progressbar" 
+				aria-valuenow="37" aria-valuemin="0" aria-valuemax="100" style="width:{{rt}}%">
+				<span class="sr-only">{{rt}}% Complete (warning)</span>
+			</div>
+		</div>
+	</div>
+	{%endwith%}
+</div>
+<div class='row'>
+	{% with rt=usage.disk_used%}
+	<div class="col-lg-4 pull-right">
+		Floating Ips: {{usage.disk_used}}/{{quota.floating_ips}}
+	</div>
+	<div  class="col-lg-8">
+		<div class="progress">
+			<div class="progress-bar progress-bar-danger" role="progressbar" 
+				aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:{{rt}}%">
+				<span class="sr-only">{{rt}}% Complete (warning)</span>
+			</div>
+		</div>
+	</div>
+	{%endwith%}
+</div>
+<div class='row'>
+	{% with rt=usage.ints_used %}
+	<div class="col-lg-4 pull-right">
+		Instances: {{usage.ints_used}}/{{quota.instances}} 
+	</div>
+	<div  class="col-lg-8">
+		<div class="progress">
+			<div class="progress-bar progress-bar-warning" role="progressbar" 
+				aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
+				style="width: {{ rt }}%">
+				<span class="sr-only">{{ rt }} Complete (warning)</span>
+			</div>
+		</div>
+	</div>
+	{%endwith%}
+</div>

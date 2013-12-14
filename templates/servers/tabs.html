@@ -1,0 +1,64 @@
+<div id="datatable_wrapper" class="dataTables_wrapper" role="grid">
+	<table class="table table-hover table-bordered bootstrap-datatable dataTable" id="datatable">
+		<thead style="  color: #3a87ad; background-color: #d9edf7; border-color: #bce8f1;">
+			<tr class="odd">
+				<th width="5%"><input type="checkbox" class="check_all"></th>
+				<th width="20%" >Name</th>
+				<th width="10%">Cpu</th>
+				<th width="10%">Memory(MB)</th>
+				<th width="20%">Netwrok(Mbits/s)</th>
+				<th width="15%">Fullest disk(GB)</th>
+				<th width="20%">Action</th>
+			</tr>
+		</thead>
+		<tbody id="servers-table">
+			{% for h in servers %}
+			<tr server_id={{h.id}}>
+				<td class="server_chooser">
+					<input type="checkbox">
+				</td>
+				<td class="server-name" ><a href="{{SITE_PATH.servers}}{{h.id}}/">{{ h.name }}</a></td>
+				<td>
+					<a href="{{SITE_PATH.servers}}{{h.id}}/?tab=server_processer">{{h.cpu.ratio}} %</a> 
+					<div>{{h.cpu.cores}} cores<div>
+				</td>
+				<td>
+					<a href="{{SITE_PATH.servers}}{{h.id}}/?tab=server_processer">{{h.mem.ratio}} %</a> 
+					<div>{{h.mem.used}} / {{h.mem.total}}</div>
+				</td>
+				<td>
+					<a href="{{SITE_PATH.servers}}{{h.id}}/?tab=server_network">{{h.net.ratio}} %</a> 
+					<div>in: {{h.net.in}} / out: {{h.net.out}}</div>
+				</td>
+				<td>
+					<a href="{{SITE_PATH.servers}}{{h.id}}/?tab=server_disks">{{h.disk.ratio}} %</a> 
+					<div>{{h.disk.used}} / {{h.disk.total}}</div>
+				</td>
+				<td>
+					<!-- Split button -->
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-default"><a href="{{h.id}}/?tab=server_console">Console</a></button>
+						<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Reboot</a></li>
+							<li><a href="#">Shutdown</a></li>
+							<li><a href="#">Suspend</a></li>
+							<li><a href="#">Pause</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Edit</a></li>
+							<li><a href="#">Remove</a></li>
+							<li><a href="#">Clone</a></li>
+							<li><a href="#">Snapshot</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Remove from favorite</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

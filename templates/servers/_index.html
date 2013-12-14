@@ -1,0 +1,17 @@
+<div class="row" name="panel-table">
+		<form > </form>
+		<form name="server-action" enctype="multipart/form-data" action="{{SITE_PATH.servers}}" method='GET'>
+				{% csrf_token %} 
+		<!-- Default panel contents -->
+		<div class="pull-right col-lg-8" style="margin-right:0%;padding:0 0 0 0">
+				<div style="margin-bottom:20px;text-align:right">
+						<button name="action" value="launch"  type="submit" class="btn btn-success">Launch Instance</button>
+						<button data-toggle="button" name="action" value="soft_reboot" type="submit" class="btn btn-warning disabled">Soft Reboot</button>
+						<button data-toggle="button" name="action" value="clone_server"  type="submit" class="btn btn-info disabled">Clone Instance</button>
+						<button data-loading-text="Loading" class="btn btn-danger ">Terminate Instance</button>
+				</div>
+		</div>
+		<!-- Table -->
+		{% include "servers/tabs.html" %}
+	</form>
+</div> <!-- end panel-table -->

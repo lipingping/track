@@ -1,0 +1,50 @@
+<!-- Collect the nav links, forms, and other content for toggling -->
+<ul class="nav">
+	<li class="nav-pills dropdown pull-left">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{curr_server.name}}<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		{% for s in servers %}
+		<li><a href="{{SITE_PATH.servers}}{{s.id}}/?tab={{tab}}">{{s.name}}</a></li>
+		{% endfor %}
+	</ul>
+	</li>
+	<ul id="server_detail_tab" data-sticky-tabs="sticky" class="nav nav-tabs">
+		<li style="min-width:85px">
+		<a align='center' href="?tab=server_overview" data-target="server_overview" >Overview</a>
+		</li>
+		<li style="min-width:85px">
+		<a align='center' href="?tab=server_processer" data-target="server_processer" >Processer</a>
+		</li>
+		<li style="min-width:85px">
+		<a align='center' href="?tab=server_disks"data-target="server_disks" >Disks</a>
+		</li>
+		<li style="min-width:85px">
+		<a align='center' href="?tab=server_network"data-target="server_network" >Network</a>
+		</li>
+		<li style="min-width:85px">
+		<a align='center' href="?tab=server_policy"data-target="server_policy" >Policy</a>
+		</li>
+		<li class="nav-pills dropdown pull-right">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Last 30 minutes  <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><a href="#">218.30.8.78</a></li>
+		</ul>
+		</li>
+	</ul>
+</ul>
+	<div id="serverTabContent" class="tab-content">
+		<div class="tab-pane active" id={{tab}}>
+			{% if tab == "server_overview" %}
+			{% include "servers/detail/server_overview.html" %}
+			{% elif tab == "server_processer" %}
+				{% include "servers/detail/server_processer.html" %}
+			{% elif tab == "server_disks" %}
+				{% include "servers/detail/server_disks.html" %}
+			{% elif tab == "server_network" %}
+				{% include "servers/detail/server_network.html" %}
+			{% elif tab == "server_policy" %}
+				{% include "servers/detail/server_policy.html" %}
+			{% endif %}
+		</div>
+	</div>
+

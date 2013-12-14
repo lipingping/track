@@ -1,0 +1,18 @@
+{% extends "bases/_base.html" %}
+
+{% block pageTopHeader %}
+{% include "bases/_pageTopHeader.html" %}
+{% endblock %}
+
+{% block leftMenu %}
+{% include "content/leftMenu.html" %}
+{% endblock %}
+
+{% block mainContent %}
+{% include "dashboard/_index.html" %}
+{% endblock %}
+
+{% block footerJsBlock %}
+<script src="/assets/js/highcharts/highcharts.js"></script>
+<script src="/assets/js/graph.js"></script>
+{% endblock %}
