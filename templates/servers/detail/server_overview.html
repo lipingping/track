@@ -1,24 +1,33 @@
-<div class="page-header" style="margin-top:-15px;">
-	<h3>basic info</h3>
-</div>
-<div class="well">
-	<p> server name: {{server.name}} </p>
-	<p> server status: {{server.status}} </p>
-	<p> server id: {{server.id}} </p>
-</div>
-<div class="page-header" style="margin-top:-10px;">
-	<h3>specs</h3>
-</div>
-<div class="well">
-	<p> server vcpu: {{server.metadata.flavor.vcpus}} </p>
-	<p> server memory: {{server.metadata.flavor.ram}} </p>
-	<p> server swap: {{server.metadata.flavor.swap}} </p>
-	<p> server disk: {{server.metadata.flavor.disk}} </p>
-	<p> server ephemeral: {{server.metadata.flavor.ephemeral}} </p>
-	<p> server image_name: 
-	<a href="{{ SITE_PATH.images_snapshots}}{{server.image.id}}" >{{server.image_name}}</a> 
-	</p>
-	{% for i in server.metadata.volumes %}
-	{{i.device}} ,{{ i.id}}, {{i.is_loaded}}, {{ i.name}}, {{ i.serverId}}, {{  i.volumeId}}
-	{% endfor %}
+<div class="row">
+	<div class='col-lg-7'>
+		<h5>CPU summary</h5>
+		<div style="margin-left:0px;" id='cpuInfo'></div>
+	</div>
+	<div class='col-lg-5'>
+		<h5>Load average</h5>
+		<div style="margin-left:0px;" id='loadInfo'></div>
+	</div>
+	<div class='col-lg-7'>
+		<h5>Physical memory summary</h5>
+		<div style="margin-left:0px;" id='memoryInfo'></div>
+	</div>
+	<div class='col-lg-5'>
+		<h5>track-db-001</h5>
+		<hr>
+		<strong>CPU:</strong> 4 cores.
+	</div>
+	<div class='row col-lg-7'>
+		<div class='col-lg-6' style="margin-left:-10px;">
+			<h5> Disk I/O utilization</h5>
+			<div style="margin-left:0px;" id='disksInfo'></div>
+		</div>
+		<div class='col-lg-6' style="float:right;">
+			<h5>Network I/O (Kb/s)</h5>
+			<div style="margin-left:0px;" id='networkInfo'></div>
+		</div>
+	</div>
+	<div class='col-lg-5'>
+		<h5>Processes</h5>
+		<hr>
+	</div>
 </div>

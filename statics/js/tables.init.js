@@ -199,7 +199,7 @@ $(document).ready(function() {
 			"sLengthMenu": "_MENU_ records per page"
 		}
 	} );
-	$(".filter >div >label").css({"margin":"3px 0 0 -12px","width":"180px","height":"30px"});
+	$(".filter >div >label").css({"margin":"3px 0 0 -9px","width":"180px","height":"30px"});
 	$(".filter >div >label input").css({"height":"30px"});
 	$(".filter >div >label >input").addClass("form-control");
 	$(".filter >div >label >input").attr("placeholder","Enter to filter");

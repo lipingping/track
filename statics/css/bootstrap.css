@@ -372,8 +372,10 @@ img {
 }
 
 hr {
+	/*
   margin-top: 20px;
   margin-bottom: 20px;
+  */
   border: 0;
   border-top: 1px solid #eeeeee;
 }
@@ -746,10 +748,12 @@ pre code {
 }
 
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 20px;
+  padding-left: 5px;
+  /*
   margin-right: auto;
   margin-left: auto;
+  */
 }
 
 .container:before,
@@ -773,8 +777,6 @@ pre code {
 }
 
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
 }
 
 .row:before,
@@ -847,8 +849,8 @@ pre code {
 .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 1px;
+  padding-left: 10px;
 }
 
 .col-xs-1,
@@ -915,7 +917,6 @@ pre code {
 
 @media (min-width: 768px) {
   .container {
-    max-width: 750px;
   }
   .col-sm-1,
   .col-sm-2,
@@ -1069,7 +1070,6 @@ pre code {
 
 @media (min-width: 992px) {
   .container {
-    max-width: 970px;
   }
   .col-md-1,
   .col-md-2,
@@ -1231,9 +1231,7 @@ pre code {
 }
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 1199px;
-  }
+  /*.container { max-width: 1199px; }*/
   .col-lg-1,
   .col-lg-2,
   .col-lg-3,
@@ -4015,7 +4013,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   position: relative;
   z-index: 1000;
   min-height: 50px;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   border: 1px solid transparent;
 }
 
