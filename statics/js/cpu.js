@@ -11,7 +11,8 @@ $(document).ready(function () {
 				plotBorderWidth:1,  borderWidth:0, height: 160, type: 'area',  zoomType: 'x' }, 
 			credits:{ enabled:false }, 
 			title: null, 
-			xAxis:{type: 'datetime',
+			xAxis:{
+				type: 'datetime',
 				dateTimeLabelFormats: {
 					millisecond: '%H:%M:%S.%L', 
 					second: '%H:%M:%S', 
@@ -22,33 +23,36 @@ $(document).ready(function () {
 					month: '%b \'%y', 
 					year: '%Y'
 				}, 
-				startOnTick: true, 
-				minPadding: -0.01, 
-				showEmpty:false, 
 				labels:{
 					format: '{value:%H:%M}', 
 					align: 'left', 
-				}
-				, showLastLabel:true, showFirstLabel:true
+				}, 
+				tickWidth:0, 
+				startOnTick: true, 
+				minPadding:0, 
+				maxPadding:0, 
 			}, 
-			yAxis:{ title:null, max:100, tickPositions:[0, 50, 100], labels:{ format: '{value} % ', } 
-				, showEmpty:false
+			yAxis:{ title:null, max:100, tickPositions:[0, 50, 100], labels:{ format: '{value} % ', }, 
 			},
 			legend:{ useHTML:true, borderRadius:0, borderWidth:0, },
-			tooltip: { shared: true, crosshairs: true, valueSuffix: ' %'
+			tooltip:{ shared: true, crosshairs: true, valueSuffix: ' %'
 				//pointFormat: '{series.name}:<b>{point.y:,.0f}%</b><br/>time: {point.x}'
 			},
 			plotOptions: {
 				area: {
+					pointStart:1, 
+					trackByArea:true, 
+					allowPointSelect:true, 
+					pointPlacement:'between', 
     	                marker: {
     	                    enabled: false,
     	                    symbol: 'circle',
-    	                    radius: 2,
+    	                    radius: 1,
     	                    states: { hover: { enabled: true } }
     	                }
     	            }
 			},
-			series: [ {name: 'System', data: [0, 9, 3, 5, 1, 7, 8, 19] }]
+			series: [ {name: 'System', type:'area', data: [7, 9, 3, 5, 1, 7, 8, 19, 29, 17] }]
 		});
 	});
 });
