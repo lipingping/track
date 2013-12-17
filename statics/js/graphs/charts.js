@@ -1,10 +1,18 @@
-function drawGraphs(id, type, url, yMax, yPoints, yUnits){
-	if(yMax==null)
-		yMax = 100;
-	if(yPoints==null)
-		yPoints = [0, 50, 100];
-	if(yUnits == null)
-		yUnits = '%'
+function drawGraphs(id, type, url, xAxis, yAxis, toolTip, plotOptions, callback){
+
+	if(!yAxis){
+		yAxis = {
+			max:100, 
+			points:[0, 50, 100], 
+			units:'%', 
+		}
+	}
+	if(!toolTip){
+		toolTip = { units:'%', }
+	}
+	if(!plotOptions){
+		plotOptions = {area:{stacking:''}}
+	}
 
 	$.getJSON(url,  function(data){
 		$('#'+ id).highcharts({ 
@@ -13,8 +21,7 @@ function drawGraphs(id, type, url, yMax, yPoints, yUnits){
 				type: type,  zoomType: 'x', plotBorderWidth:1, 
 				spacing: [10,  14,  15,  0], 
 				showAxes:true, 
-				//shadow:true, 
-				alignTicks:false, 
+				alignTicks:true, 
 			}, 
 			credits:{ enabled:false }, 
 			title: null, 
@@ -37,10 +44,12 @@ function drawGraphs(id, type, url, yMax, yPoints, yUnits){
 				startOnTick: true, 
 				minPadding:0, 
 				maxPadding:0, 
+				showFirstLabel:false, 
+				showLastLabel:false, 
             	tickPositioner: function () {
             	    var positions = [],
             	        tick = Math.floor(this.dataMin),
-            	        increment = Math.ceil((this.dataMax - this.dataMin) / 5);
+            	        increment = Math.ceil((this.dataMax - this.dataMin) / 6);
 
             	    for (; tick - increment <= this.dataMax; tick += increment) {
             	        positions.push(tick);
@@ -49,20 +58,21 @@ function drawGraphs(id, type, url, yMax, yPoints, yUnits){
             	}
 			}, 
 			yAxis:{ 
-				title:null, max:yMax, 
-				tickPositions:yPoints, 
-				labels:{ format: '{value} '+yUnits+" ", }, 
+				title:null, 
+				max:yAxis['max'], 
+				tickPositions:yAxis.points, 
+				labels:{ format: '{value} '+ yAxis.units + " ", }, 
 				lineWidth:0,
-				showFirstLabel:false,
-				showLaseLabel:false,
 			},
 			legend:{borderWidth:0,},
 			tooltip: { 
-				shared: true, crosshairs: true, valueSuffix: ' %', 
-				pointFormat: '{series.name}: <b>{point.y:,.2f} '+yUnits+'</b><br/>'
+				shared: true, crosshairs: true, valueSuffix: +yAxis.unis, 
+				pointFormat: '{series.name}: <b>{point.y:,.2f} '+toolTip.units+'</b><br/>'
 			},
 			plotOptions: { 
 				area: { 
+					stacking: plotOptions['area']['stacking'], 
+					//stacking: 'percent', 
 					marker: { enabled: false, symbol: 'circle', radius: 2,  
 						states: { hover: { enabled: true } } 
 					} 
@@ -78,9 +88,51 @@ function drawGraphs(id, type, url, yMax, yPoints, yUnits){
 	});
 };
 $(document).ready(function () {
-	drawGraphs('cpuInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/cpu");
-	drawGraphs('loadInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/load", 10, [0, 5, 10], '');
-	drawGraphs('memoryInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/memory");
-	drawGraphs('disksInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/disks");
-	drawGraphs('networkInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/network", 1024, [0,256, 512, 768, 1024], '');
+
+
+	//function drawGraphs(id, type, url, xAxis, yAxis, toolTip, plotOptions, callback);
+	var xAxis ={};
+	var yAxis = {
+		max:10, 
+		units:null, 
+		points:[0, 5, 10], 
+	};
+
+	var toolTip = {units:'Kbits/sec'};
+	var plotOptions={area:{stacking:'normal'}};
+
+	drawGraphs('cpuInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/cpu", null, null, null, plotOptions);
+
+	/* Load info */
+	var atoolTip = {units:''};
+	var ayAxis = {
+		max:10, 
+		units:'', 
+		points:[0, 5, 10], 
+	};
+	drawGraphs('loadInfo', 'line', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/load",xAxis,ayAxis,atoolTip);
+
+	/* memoryInfo */
+	yAxis.points = null;
+	yAxis.units  = '%';
+	toolTip.units = '%';
+
+	drawGraphs('memoryInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/memory", 
+		xAxis,null, null, null);
+
+
+	/* disksInfo */
+	drawGraphs('disksInfo', 'area', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/disks", 
+		xAxis, null, null, null);
+
+	/* networkInfo */
+	yAxis = {
+		max: 1024, 
+		units:'', 
+		points:[0, 256, 512, 768, 1024], 
+	};
+	toolTip.units = 'Kbits/sec';
+	drawGraphs('networkInfo', 'line', "http://10.211.55.7:82/servers/acd0987-1afd-0089-a567/network", 
+		null, yAxis, toolTip, null
+	);
 });

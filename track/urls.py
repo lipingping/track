@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'track.views.home', name='home'),
     # url(r'^track/', include('track.foo.urls')),
+    url(r'^docs/', 'track.tools.views.IndexView', name='home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
